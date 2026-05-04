@@ -2,8 +2,8 @@ Instructions:
 Create menu folder
 res → Right Click → New → Android Resource Directory → Resource Type = menu
 
-Place XML files inside
-res/menu/
+Create XML files for menu
+Right Click on Menu -> New -> Menu Resource File -> name = menu
 
 Steps to Add Vector Asset for android
 
