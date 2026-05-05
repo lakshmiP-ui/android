@@ -1,0 +1,109 @@
+// Create Paint for circle
+val pCircle = Paint()
+pCircle.color = Color.BLACK
+
+// Draw circle
+canvas.drawCircle(
+    30f,   // x-coordinate
+    30f,   // y-coordinate
+    30f,   // radius
+    pCircle
+)
+
+// Create Paint for square
+val pBackground = Paint()
+pBackground.color = Color.RED
+
+// Draw rectangle
+canvas.drawRect(
+    450f,  // left
+    450f,  // top
+    500f,  // right
+    500f,  // bottom
+    pBackground
+)
+
+//Solution for last extra canvas question
+
+🔹 MainActivity.kt
+package com.example.myapplication
+
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
+import android.graphics.drawable.shapes.RectShape
+import android.os.Bundle
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val bitmap = Bitmap.createBitmap(800, 1200, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        var shapeDrawable: ShapeDrawable
+
+        // 🔴 RED SQUARE (LEFT)
+        shapeDrawable = ShapeDrawable(RectShape())
+        shapeDrawable.setBounds(100, 400, 200, 500)
+        shapeDrawable.paint.color = Color.RED
+        shapeDrawable.draw(canvas)
+
+        // 🔴 RED SQUARE (CENTER)
+        shapeDrawable = ShapeDrawable(RectShape())
+        shapeDrawable.setBounds(350, 550, 450, 650)
+        shapeDrawable.paint.color = Color.RED
+        shapeDrawable.draw(canvas)
+
+        // 🔵 BLUE CIRCLE (MIDDLE)
+        shapeDrawable = ShapeDrawable(OvalShape())
+        shapeDrawable.setBounds(350, 400, 450, 500)
+        shapeDrawable.paint.color = Color.BLUE
+        shapeDrawable.draw(canvas)
+
+        // 🔵 BLUE CIRCLE (BOTTOM)
+        shapeDrawable = ShapeDrawable(OvalShape())
+        shapeDrawable.setBounds(350, 800, 450, 900)
+        shapeDrawable.paint.color = Color.BLUE
+        shapeDrawable.draw(canvas)
+
+        // 🟢 GREEN TRIANGLES
+        val paint = Paint()
+        paint.color = Color.GREEN
+        paint.style = Paint.Style.FILL
+
+        val triangle1 = Path()
+        triangle1.moveTo(550f, 200f)
+        triangle1.lineTo(500f, 300f)
+        triangle1.lineTo(600f, 300f)
+        triangle1.close()
+
+        val triangle2 = Path()
+        triangle2.moveTo(700f, 200f)
+        triangle2.lineTo(650f, 300f)
+        triangle2.lineTo(750f, 300f)
+        triangle2.close()
+
+        canvas.drawPath(triangle1, paint)
+        canvas.drawPath(triangle2, paint)
+
+        // SET IMAGE
+        val iv = findViewById<ImageView>(R.id.imageV)
+        iv.background = BitmapDrawable(resources, bitmap)
+    }
+}
+
+✅ activity_main.xml
+<ImageView
+    android:id="@+id/imageV"
+    android:layout_width="315dp"
+    android:layout_height="526dp"
+    android:layout_marginTop="100dp"
+    android:layout_marginEnd="50dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
